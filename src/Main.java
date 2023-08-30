@@ -26,32 +26,62 @@ public class Main {
 
         //choose a word
         // char aCharacter = '^'; // this is a character
-
         String word = "viking";
 
         // split the word
         String[] myWord = new String[word.length()];
         myWord = word.split("");
+        printArray(myWord);
+
+        // the word that has been guessed
+        String[] revealedWord = new String[myWord.length];
+        int counter = 0;
+        //creates an array filled with "_"
+        while (counter < revealedWord.length) {
+            revealedWord[counter] = "_";
+            counter++;
+            //counter = counter + 1;   //same as counter++
+            // counter =+ 1;    //same as counter++
+        }
+        printArray(revealedWord);
+
+        //set the amount of lives (tries) the user has
+        int lives = 5;
 
         //Get user input
         Scanner myScan = new Scanner(System.in);
+        System.out.print("Enter a guess: ");
         String guess = myScan.nextLine();
 
         System.out.println("User guess is " + guess);
 
-
-
-
-
-
-        /*
-        //Print content of array
+        boolean letterExists = false;
+        //check if the letter is in the word
         for (int i = 0; i < myWord.length; i++) {
-            System.out.println(myWord[i]);
+            if (guess.equals(myWord[i])) {
+                System.out.println("the letter " + guess + " is in position " + i);
+                //replace the "_" in revealedWord with the guess
+                revealedWord[i] = guess;
+                letterExists = true;
+            }
         }
-         */
+
+        if (!letterExists) { // same as : letterExists == false
+            lives--;
+        }
+
+        //print our reveald word
+        printArray(revealedWord);
+        System.out.println("you now have " + lives + " lives left");
 
 
+    }
+
+    public static void printArray(String[] myArray) {
+        for (int i = 0; i < myArray.length; i++) {
+            System.out.print(myArray[i]);
+        }
+        System.out.println();
     }
 }
 
