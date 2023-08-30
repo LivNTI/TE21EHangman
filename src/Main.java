@@ -47,32 +47,40 @@ public class Main {
 
         //set the amount of lives (tries) the user has
         int lives = 5;
+        boolean wordRevealed = false; // must be false to initiate the loop
 
-        //Get user input
-        Scanner myScan = new Scanner(System.in);
-        System.out.print("Enter a guess: ");
-        String guess = myScan.nextLine();
+        while ((lives > 0) && (wordRevealed == false)) { // !wordRevealed samma som wordRevealed == false
+            //we assume that the word ahs been revealed
+            wordRevealed = true;
+            //Get user input
+            Scanner myScan = new Scanner(System.in);
+            System.out.print("Enter a guess: ");
+            String guess = myScan.nextLine();
 
-        System.out.println("User guess is " + guess);
+            System.out.println("User guess is " + guess);
 
-        boolean letterExists = false;
-        //check if the letter is in the word
-        for (int i = 0; i < myWord.length; i++) {
-            if (guess.equals(myWord[i])) {
-                System.out.println("the letter " + guess + " is in position " + i);
-                //replace the "_" in revealedWord with the guess
-                revealedWord[i] = guess;
-                letterExists = true;
+            boolean letterExists = false;
+            //check if the letter is in the word
+            for (int i = 0; i < myWord.length; i++) {
+                if (guess.equals(myWord[i])) {
+                    System.out.println("the letter " + guess + " is in position " + i);
+                    //replace the "_" in revealedWord with the guess
+                    revealedWord[i] = guess;
+                    letterExists = true;
+                }
+                if ("_".equals(revealedWord[i])) {
+                    wordRevealed = false;
+                }
             }
-        }
 
-        if (!letterExists) { // same as : letterExists == false
-            lives--;
-        }
+            if (!letterExists) { // same as : letterExists == false
+                lives--;
+            }
 
-        //print our reveald word
-        printArray(revealedWord);
-        System.out.println("you now have " + lives + " lives left");
+            //print our reveald word
+            printArray(revealedWord);
+            System.out.println("you now have " + lives + " lives left");
+        }
 
 
     }
