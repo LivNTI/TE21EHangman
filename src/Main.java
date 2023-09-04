@@ -94,9 +94,16 @@ public class Main {
     }
 
     public static void printArray(String[] myArray) {
+
+        for (String myStr : myArray) {
+            System.out.print(myStr);
+        }
+        /*
         for (int i = 0; i < myArray.length; i++) {
             System.out.print(myArray[i]);
         }
+
+         */
         System.out.println();
     }
 }
