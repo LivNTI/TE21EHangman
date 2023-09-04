@@ -1,21 +1,7 @@
 /*
- * Todo:
- *   * välj ett ord
- *     - statisk
- *     - user input?
- *     - från en lista?
- *     - från en fil?
- *     - från en hemsida
- *   * använder väljer en bokstav
- *   * finns bokstaven i ordet?
- *       - var är bokstaven?
- *       - visa bokstaven
- *       - bli av med försök
- *   * loopa tills
- *       - ordet är helt
- *       - inga liv
- *   *
-
+ *   This is a hangman example
+ *
+ * @AUTHOR LivNTI
  */
 
 import java.util.Scanner;
@@ -25,15 +11,13 @@ public class Main {
         System.out.println("Hello and welcome to Hangman");
 
         //choose a word
-        // char aCharacter = '^'; // this is a character
         String word = "ödla";
 
-        //declaring varieables for later use
+        //declaring variables for later use
         String guess;
 
         // split the word
-        String[] myWord = new String[word.length()];
-        myWord = word.split("");
+        String[] myWord = word.split("");
         printArray(myWord);
 
         // the word that has been guessed
@@ -43,8 +27,6 @@ public class Main {
         while (counter < revealedWord.length) {
             revealedWord[counter] = "_";
             counter++;
-            //counter = counter + 1;   //same as counter++
-            // counter =+ 1;    //same as counter++
         }
         printArray(revealedWord);
 
@@ -65,8 +47,6 @@ public class Main {
             } while ((!guess.matches("[a-öA-Ö]+"))
                     || (guess.length() != 1));
 
-            System.out.println("User guess is " + guess);
-
             boolean letterExists = false;
             //check if the letter is in the word
             for (int i = 0; i < myWord.length; i++) {
@@ -81,29 +61,21 @@ public class Main {
                 }
             }
 
+            // if wrong guess reduce lives
             if (!letterExists) { // same as : letterExists == false
                 lives--;
             }
 
-            //print our reveald word
+            //print our revealed word
             printArray(revealedWord);
             System.out.println("you now have " + lives + " lives left");
         }
-
-
     }
 
     public static void printArray(String[] myArray) {
-
         for (String myStr : myArray) {
             System.out.print(myStr);
         }
-        /*
-        for (int i = 0; i < myArray.length; i++) {
-            System.out.print(myArray[i]);
-        }
-
-         */
         System.out.println();
     }
 }
