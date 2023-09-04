@@ -26,7 +26,10 @@ public class Main {
 
         //choose a word
         // char aCharacter = '^'; // this is a character
-        String word = "viking";
+        String word = "ödla";
+
+        //declaring varieables for later use
+        String guess;
 
         // split the word
         String[] myWord = new String[word.length()];
@@ -46,7 +49,7 @@ public class Main {
         printArray(revealedWord);
 
         //set the amount of lives (tries) the user has
-        int lives = 5;
+        int lives = 2;
         boolean wordRevealed = false; // must be false to initiate the loop
 
         while ((lives > 0) && (wordRevealed == false)) { // !wordRevealed samma som wordRevealed == false
@@ -54,18 +57,23 @@ public class Main {
             wordRevealed = true;
             //Get user input
             Scanner myScan = new Scanner(System.in);
-            System.out.print("Enter a guess: ");
-            String guess = myScan.nextLine();
+
+            //check if guess is allowed
+            do {
+                System.out.print("Enter a guess: ");
+                guess = myScan.nextLine();
+            } while ((!guess.matches("[a-öA-Ö]+"))
+                    || (guess.length() != 1));
 
             System.out.println("User guess is " + guess);
 
             boolean letterExists = false;
             //check if the letter is in the word
             for (int i = 0; i < myWord.length; i++) {
-                if (guess.equals(myWord[i])) {
+                if (guess.equalsIgnoreCase(myWord[i])) {
                     System.out.println("the letter " + guess + " is in position " + i);
                     //replace the "_" in revealedWord with the guess
-                    revealedWord[i] = guess;
+                    revealedWord[i] = guess.toUpperCase();
                     letterExists = true;
                 }
                 if ("_".equals(revealedWord[i])) {
